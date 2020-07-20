@@ -8,7 +8,6 @@ import {
   FlatList,
   View,
   Keyboard,
-  Modal,
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
@@ -22,29 +21,27 @@ const Home = () => {
 
   const [name, setName] = useState();
   const [data, setData] = useState([]);
-  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    db.collection('names').onSnapshot((query) => {
-      const items = [];
-      query.forEach((doc) => {
-        items.push({...doc.data(), id: doc.id});
+    db.collection('names')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((query) => {
+        const items = [];
+        query.forEach((doc) => {
+          items.push({...doc.data(), id: doc.id});
+        });
+        setData(items);
       });
-      setData(items);
-    });
   }, [db]);
 
   const handleAdd = () => {
-    db.collection('names').add({name});
+    db.collection('names').add({name, timestamp: Date(new Date())});
     Keyboard.dismiss();
+    setName('');
   };
 
   const handleDelete = (id) => {
     db.collection('names').doc(id).delete();
-  };
-
-  const handleEdit = () => {
-    setShow(false);
   };
 
   return (
@@ -139,7 +136,10 @@ const Home = () => {
             <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('Edit');
+                  navigation.navigate('Edit', {
+                    userId: item.id,
+                    userName: item.name,
+                  });
                 }}
                 style={{backgroundColor: '#fc0', padding: 5, marginRight: 10}}>
                 <Text style={{color: '#222'}}>Edit</Text>
