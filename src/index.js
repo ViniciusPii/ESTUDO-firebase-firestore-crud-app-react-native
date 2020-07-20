@@ -49,7 +49,7 @@ const App = () => {
         renderItem={({item}) => (
           <View
             style={{
-              height: 40,
+              height: 60,
               backgroundColor: '#ccc',
               marginTop: 10,
               alignItems: 'center',
@@ -59,11 +59,18 @@ const App = () => {
               flexDirection: 'row',
             }}>
             <Text style={{fontSize: 18}}>{item.name}</Text>
-            <TouchableOpacity
-              onPress={() => {}}
-              style={{backgroundColor: '#f00', padding: 5}}>
-              <Text style={{color: '#fff'}}>Del</Text>
-            </TouchableOpacity>
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                onPress={() => {}}
+                style={{backgroundColor: '#fc0', padding: 5, marginRight: 10}}>
+                <Text style={{color: '#222'}}>Edit</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {}}
+                style={{backgroundColor: '#d00', padding: 5}}>
+                <Text style={{color: '#fff'}}>Delete</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         )}
       />
