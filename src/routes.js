@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {createStackNavigator} from '@react-navigation/stack';
+
 import Home from './home';
 import Edit from './edit';
 
@@ -14,7 +15,15 @@ const Routes = () => {
         component={Home}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="Edit" component={Edit} />
+      <Stack.Screen
+        name="Edit"
+        component={Edit}
+        options={{
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerTintColor: '#222',
+        }}
+      />
     </Stack.Navigator>
   );
 };
