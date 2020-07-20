@@ -43,9 +43,10 @@ const App = () => {
       </TouchableOpacity>
       <Text style={{fontSize: 20, marginTop: 60}}>Lista de Nomes</Text>
       <FlatList
-        style={{width: '90%', marginTop: 10}}
+        style={{width: '90%', marginTop: 10, marginBottom: 20}}
         data={data}
         key={data.id}
+        showsVerticalScrollIndicator={false}
         renderItem={({item}) => (
           <View
             style={{
